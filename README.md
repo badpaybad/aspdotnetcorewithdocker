@@ -5,8 +5,15 @@
 				https://docs.docker.com/get-docker/
 
 # dockerfile
+
+				eg: this git
+				D:/.../WebApiTemplate
+				D:/.../WebApiTemplate.sln
+				D:/.../Dockerfile
+				D:/.../docker-compose.yml
+
 				
-				copy files: Dockerfile
+copy files: Dockerfile
 
 can change "WebApiTemplate" (in dockerfile) into your directory
 				
@@ -18,7 +25,7 @@ can change "WebApiTemplate" (in dockerfile) into your directory
 				D:/TestApi/Dockerfile
 
 				replace:
-				"/WebApiTemplate/" into "webapi"
+				"WebApiTemplate" into "webapi"
 
 				WebApiTemplate.csproj into webapi.csproj 
 				WebApiTemplate.dll into webapi.dll 
@@ -29,9 +36,10 @@ can change "WebApiTemplate" (in dockerfile) into your directory
 copy files: docker-compose.yml into your prj folder
 
 				eg: this git
-				D:/devdotnetenviroment/WebApiTemplate
-				D:/devdotnetenviroment/Dockerfile
-				D:/devdotnetenviroment/docker-compose.yml
+				D:/.../WebApiTemplate
+				D:/.../WebApiTemplate.sln
+				D:/.../Dockerfile
+				D:/.../docker-compose.yml
 
 can change "D:/devdotnetenviroment" (in docker-compose.yml) this path by your prj dir copied docker-compose.yml
 
