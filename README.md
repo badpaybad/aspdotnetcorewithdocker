@@ -18,7 +18,7 @@ can change "WebApiTemplate" (in dockerfile) into your directory
 				D:/TestApi/Dockerfile
 
 				replace:
-				"/WebApiTemplate/" into "webapi"
+				"WebApiTemplate" into "webapi"
 
 				WebApiTemplate.csproj into webapi.csproj 
 				WebApiTemplate.dll into webapi.dll 
