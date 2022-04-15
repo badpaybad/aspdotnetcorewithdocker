@@ -1,6 +1,6 @@
-# DevDotnetEnviroment
-
 # set up docker desktop 
+
+For developer, setup in local PC, one cmd: "docker-compose up --build" to bring all redis, mongodb, mysql to use in prj
 
 				https://docs.docker.com/get-docker/
 
@@ -41,7 +41,7 @@ copy files: docker-compose.yml into your prj folder
 				D:/.../Dockerfile
 				D:/.../docker-compose.yml
 
-can change "D:/devdotnetenviroment" (in docker-compose.yml) this path by your prj dir copied docker-compose.yml
+can change "D:/dockersampleforaspdotnet" (in docker-compose.yml) this path by your prj dir copied docker-compose.yml
 
 				Do your code in prj c# 
 				eg: 
@@ -51,7 +51,7 @@ can change "D:/devdotnetenviroment" (in docker-compose.yml) this path by your pr
 				D:/TestApi/Dockerfile
 				D:/TestApi/docker-compose.yml
 
-				replace "D:/devdotnetenviroment" (in docker-compose.yml) into "D:/TestApi"
+				replace "D:/dockersampleforaspdotnet" (in docker-compose.yml) into "D:/TestApi"
 
 open powershell or cmd in your proj folder
 		
@@ -59,12 +59,20 @@ open powershell or cmd in your proj folder
 				D:/TestApi/
 
 				open cmd in D:/TestApi/ type command:
-				docker-compose up
+				
+                docker-compose up --build
 
 				Open dashboard of docker desktop
 
-check file docker-compose.yml if you want to change default user/ pass
+check file docker-compose.yml if you want to change default port / user/ pass
 
 				redis connnect by: localhost:9379 pass: 123456
 				mysql connnect by: localhost:9306 user: root ; pass: 123456
 				mongo connnect by: localhost:9017 user: test ; pass: 123456
+
+
+# rebuild  prj code to docker image
+
+check file docker-compose.yml with services name: webapiteamplate to find where is dockerfile to build image
+                
+                docker-compose build webapiteamplate
