@@ -1,0 +1,67 @@
+version: '3.4'
+
+services:
+    webapiteamplate: 
+        #docker build -f "D:/devdotnetenviroment/WebApiTemplate/Dockerfile" --force-rm -t webapiteamplate "D:/devdotnetenviroment/WebApiTemplate/" 
+        build: 
+            cache_from:
+                - mcr.microsoft.com/dotnet/sdk:6.0
+                - mcr.microsoft.com/dotnet/aspnet:6.0
+            context: "D:/dockersampleforaspdotnet/WebApiTemplate/" 
+            dockerfile: "D:/dockersampleforaspdotnet/WebApiTemplate/Dockerfile"
+        image: "webapiteamplate" # similar to : -t webapiteamplate
+
+            #docker run --rm -it -p 9443:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=443 -e ASPNETCORE_Kestrel__Certificates__Default__Password="123456" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ --mount type=bind,source=D:/devdotnetenviroment/WebApiTemplate/WebApiTemplate/appsettings.json,target=/app/appsettings.json webapiteamplate 
+            #docker run --rm -it -p 9080:80 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=443 -e ASPNETCORE_Kestrel__Certificates__Default__Password="123456" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ --mount type=bind,source=D:/devdotnetenviroment/WebApiTemplate/WebApiTemplate/appsettings.json,target=/app/appsettings.json webapiteamplate 
+   
+        ports:
+            #- "9443:443"
+            - "9080:80"      
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=https://+:443;http://+:80
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=123456
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+        volumes:
+            - ~/.aspnet/https:/https:ro
+            - ./WebApiTemplate/wwwroot:/app/wwwroot
+            #--mount type=bind,source=D:/devdotnetenviroment/WebApiTemplate/WebApiTemplate/appsettings.json,target=/app/appsettings.json
+            - ./WebApiTemplate/appsettings.json:/app/appsettings.json
+        # depends_on:
+        #     - redis
+        #     - mysql
+        #     - mongo
+    redis:
+        image: redis:6.2-alpine
+        restart: always
+        ports:
+          - '9379:6379'
+        command: redis-server --save 20 1 --loglevel warning --requirepass 123456
+        volumes: 
+        # when docker restart no lost data
+          - D:/dockersampleforaspdotnet/redis:/data
+          #- ~/redis:/data # "~/" folder local in C:\Users\Admin\redis 
+
+    mysql:
+        image: mysql:8
+        restart: always
+        ports:
+            - 9306:3306
+        volumes:
+            - D:/dockersampleforaspdotnet/mysql:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=123456
+            - MYSQL_PASSWORD=123456
+            - MYSQL_USER=test
+            - MYSQL_DATABASE=test
+
+    mongodb:
+        image: mongo:5.0
+        restart: always
+        ports:
+            - 9017:27017
+        volumes:
+            - D:/dockersampleforaspdotnet/mongo:/data/db
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=test
+            - MONGO_INITDB_ROOT_PASSWORD=123456
