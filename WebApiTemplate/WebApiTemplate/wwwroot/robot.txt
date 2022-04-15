@@ -1,0 +1,3 @@
+﻿*.* # allow all crawler to crap, eg: google yahoo ...
+hello
+Hi
